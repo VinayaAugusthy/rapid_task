@@ -6,16 +6,17 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('object');
+      var userData = {};
+
     return Scaffold(
       appBar: AppBar(),
-      body: const SafeArea(
-        child: const Center(
+      body:  SafeArea(
+        child:  Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Hi User....'),
+              Text('Hi ${userData['email']}....'),
             ],
           ),
         ),
