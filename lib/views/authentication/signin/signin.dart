@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rapid_task/views/authentication/signup/signup.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -87,12 +88,12 @@ class _SigninScreenState extends State<SigninScreen> {
                 children: [
                   const Text("Do not have an account ? "),
                   GestureDetector(
-                    // onTap: () => Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const SigninScreen(),
-                    //   ),
-                    // ),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignupScreen(),
+                      ),
+                    ),
                     child: const Text(
                       "Signup",
                       style: TextStyle(
