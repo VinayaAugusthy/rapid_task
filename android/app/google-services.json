@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "532393293536",
+    "project_id": "rapidd-task",
+    "storage_bucket": "rapidd-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532393293536:android:7bca5313add764a13d8285",
+        "android_client_info": {
+          "package_name": "com.example.rapid_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq6t5t2R1Mgi-BGKute7ZBMclmwNoeE-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
