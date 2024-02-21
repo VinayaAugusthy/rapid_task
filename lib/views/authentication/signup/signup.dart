@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rapid_task/viewmodels/application/bloc/authentication_bloc.dart';
+import 'package:rapid_task/views/home/home.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -31,7 +34,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  hintText: 'Enter email or mob no',
+                  hintText: 'Enter email ',
                 ),
                 // validator: (value) => validateEmail(value!),
                 // onTap: () {
@@ -61,23 +64,34 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(
                 height: size.height / 18,
               ),
-              SizedBox(
-                width: size.width,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
+              BlocConsumer<AuthenticationBloc, AuthenticationState>(
+                listener: (context, state) {},
+                builder: (context, state) {
+                  return SizedBox(
+                    width: size.width,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                        backgroundColor: MaterialStateProperty.all(Colors.blue),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(),
+                            ));
+                      },
+                      child: const Text(
+                        'Submit',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    backgroundColor: MaterialStateProperty.all(Colors.blue),
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Submit',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
+                  );
+                },
               ),
               SizedBox(
                 height: size.height / 20,
