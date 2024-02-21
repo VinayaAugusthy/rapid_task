@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rapid_task/viewmodels/application/bloc/authentication_bloc.dart';
+import 'package:rapid_task/viewmodels/application/authentication/authentication_bloc.dart';
 import 'package:rapid_task/views/home/home.dart';
 
 class SignupScreen extends StatefulWidget {

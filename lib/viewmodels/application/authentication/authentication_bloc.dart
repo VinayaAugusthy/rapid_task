@@ -1,4 +1,7 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:rapid_task/models/authentication/user_model.dart';
 import 'package:rapid_task/viewmodels/services/authentication/auth_service.dart';
 
