@@ -6,7 +6,6 @@ import 'package:rapid_task/views/home/home.dart';
 
 class AuthenticationFlowScreen extends StatelessWidget {
   const AuthenticationFlowScreen({super.key});
-  static String id = 'main screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

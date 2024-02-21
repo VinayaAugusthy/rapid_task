@@ -79,11 +79,12 @@ class _SignupScreenState extends State<SignupScreen> {
                         backgroundColor: MaterialStateProperty.all(Colors.blue),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
-                            ));
+                      BlocProvider.of<AuthenticationBloc>(context).add(
+                        SignUpUser(
+                          emailController.text.trim(),
+                          passwordController.text.trim(),
+                        ),
+                      );
                       },
                       child: const Text(
                         'Submit',
