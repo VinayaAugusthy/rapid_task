@@ -1,7 +1,6 @@
 // ignore_for_file: nullable_type_in_catch_clause, avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
 import 'package:rapid_task/models/authentication/user_model.dart';
 
 class AuthService {

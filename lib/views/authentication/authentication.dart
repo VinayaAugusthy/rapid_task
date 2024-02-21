@@ -2,7 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rapid_task/views/authentication/signup/signup.dart';
-import 'package:rapid_task/views/home/home.dart';
+import 'package:rapid_task/views/basescreen/base_screen.dart';
 
 class AuthenticationFlowScreen extends StatelessWidget {
   const AuthenticationFlowScreen({super.key});
@@ -13,7 +13,7 @@ class AuthenticationFlowScreen extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const HomeScreen();
+            return const BaseScreen();
           } else {
             return const SignupScreen();
           }

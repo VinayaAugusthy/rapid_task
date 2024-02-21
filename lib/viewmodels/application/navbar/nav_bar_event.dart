@@ -8,5 +8,5 @@ abstract class NavbarEvent {
 }
 
 class OnTapped extends NavbarEvent {
-  const OnTapped({required super.navIndex});
+   OnTapped({required super.navIndex});
 }
