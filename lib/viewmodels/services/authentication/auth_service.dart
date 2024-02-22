@@ -64,10 +64,10 @@ class AuthService {
       if (firebaseUser != null) {
         //  userRef =
         //     _firestore.collection('users').doc(firebaseUser.uid);
-        return UserModel(
-          id: firebaseUser.uid,
-          email: firebaseUser.email ?? '',
-        );
+        // return UserModel(
+        //   id: firebaseUser.uid,
+        //   email: firebaseUser.email ?? '',
+        // );
       }
     } on FirebaseAuthException catch (e) {
       print(e.toString());
