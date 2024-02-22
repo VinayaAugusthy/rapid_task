@@ -1,6 +1,8 @@
 # rapid_task
 
-A new Flutter project.
+Flutter project using Firebase.
+-> State management is done using BLoC.
+-> Hive database is used for adding and managing items locally
 
 ## Getting Started
 
