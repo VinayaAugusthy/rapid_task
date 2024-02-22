@@ -5,7 +5,7 @@ import 'package:rapid_task/models/items/items.dart';
 import 'package:rapid_task/viewmodels/application/item/item_bloc.dart';
 
 List<Items> itemsList = [];
-getRecipes() {
+getItems() {
   final itemDB = Hive.box<Items>('recipes');
   itemsList.clear();
   itemsList.addAll(itemDB.values);
