@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapid_task/viewmodels/application/authentication/authentication_bloc.dart';
 import 'package:rapid_task/views/authentication/signup/signup.dart';
 import 'package:rapid_task/views/basescreen/base_screen.dart';
+import 'package:rapid_task/views/widgets/snackbar.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -18,115 +19,102 @@ class _SigninScreenState extends State<SigninScreen> {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('SIGNIN'),
+      ),
       body: Padding(
         padding: EdgeInsets.all(size.width / 16),
         child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('SIGNIN'),
-                SizedBox(
-                  height: size.height / 10,
-                ),
-                TextFormField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextFormField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      hintText: 'Enter email',
                     ),
-                    hintText: 'Enter email',
                   ),
-                  // validator: (value) => validateEmail(value!),
-                  // onTap: () {
-                  //   setState(() {
-                  //     emailTapped = true;
-                  //   });
-                  // },
-                ),
-                SizedBox(
-                  height: size.height / 18,
-                ),
-                TextFormField(
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
+                  SizedBox(
+                    height: size.height / 18,
+                  ),
+                  TextFormField(
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      hintText: 'Enter password',
                     ),
-                    hintText: 'Enter password',
                   ),
-                  // validator: (value) => validateEmail(value!),
-                  // onTap: () {
-                  //   setState(() {
-                  //     emailTapped = true;
-                  //   });
-                  // },
-                ),
-                SizedBox(
-                  height: size.height / 18,
-                ),
-                BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                  builder: (context, state) {
-                    return SizedBox(
-                      width: size.width,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
+                  SizedBox(
+                    height: size.height / 18,
+                  ),
+                  BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                    builder: (context, state) {
+                      return SizedBox(
+                        width: size.width,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (emailController.text.isEmpty ||
+                                passwordController.text.isEmpty) {
+                              callSnackBar(
+                                  msg: 'Please fill all the fields',
+                                  ctx: context);
+                            } else {
+                              BlocProvider.of<AuthenticationBloc>(context).add(
+                                SignInUser(
+                                  emailController.text.trim(),
+                                  passwordController.text.trim(),
+                                ),
+                              );
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const BaseScreen(),
+                                  ),
+                                  (route) => false);
+                            }
+                          },
+                          child: const Text(
+                            'Submit',
+                            style: TextStyle(color: Colors.white),
                           ),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.blue),
                         ),
-                        onPressed: () {
-                          BlocProvider.of<AuthenticationBloc>(context).add(
-                            SignInUser(
-                              emailController.text.trim(),
-                              passwordController.text.trim(),
-                            ),
-                          );
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const BaseScreen(),
-                              ),
-                              (route) => false);
-                        },
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: size.height / 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text("Do not have an account ? "),
+                      GestureDetector(
+                        onTap: () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignupScreen(),
+                          ),
+                        ),
                         child: const Text(
-                          'Submit',
-                          style: TextStyle(color: Colors.white),
+                          "Signup",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(
-                  height: size.height / 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text("Do not have an account ? "),
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignupScreen(),
-                        ),
-                      ),
-                      child: const Text(
-                        "Signup",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

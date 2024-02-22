@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:rapid_task/models/items/items.dart';
 import 'package:rapid_task/viewmodels/services/manage_items/manage_items.dart';
+import 'package:rapid_task/views/widgets/snackbar.dart';
 
 class UploadItemScreen extends StatelessWidget {
   const UploadItemScreen({super.key});
@@ -50,6 +51,13 @@ class UploadItemScreen extends StatelessWidget {
                     ),
                     labelText: 'Enter quantity',
                   ),
+                  validator: (value) {
+                    if (quantityController.text.isEmpty) {
+                      return 'Please fill this field';
+                    } else {
+                      return null;
+                    }
+                  },
                 ),
                 SizedBox(
                   height: size.height / 18,
@@ -60,7 +68,7 @@ class UploadItemScreen extends StatelessWidget {
                     onPressed: () async {
                       if (itemController.text.isEmpty ||
                           quantityController.text.isEmpty) {
-                        print('fill');
+                        callSnackBar(msg: 'Please fill all the fields', ctx: context);
                       } else {
                         final item = Items(
                           item: itemController.text.trim(),
