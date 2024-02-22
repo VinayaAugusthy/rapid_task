@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rapid_task/views/manage_items/upload.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,7 +22,19 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       child: SingleChildScrollView(
         child: Column(
-          children: [Container(), FloatingActionButton(onPressed: () {})],
+          children: [
+            Container(),
+            FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UploadItemScreen(),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     )));

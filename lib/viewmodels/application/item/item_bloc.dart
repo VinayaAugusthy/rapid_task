@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:rapid_task/models/items/items.dart';
 import 'package:rapid_task/viewmodels/services/manage_items/manage_items.dart';
 
