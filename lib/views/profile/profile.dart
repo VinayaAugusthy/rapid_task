@@ -21,57 +21,60 @@ class ProfileScreen extends StatelessWidget {
               if (snapshot.hasData) {
                 final userData = snapshot.data;
                 return Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Hi ${userData!.username}...',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                  child: Padding(
+                    padding:  EdgeInsets.all(size.width/16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Hi ${userData!.username}...',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'email: ${userData.email}',
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      BlocConsumer<AuthenticationBloc, AuthenticationState>(
-                        listener: (context, state) {},
-                        builder: (context, state) {
-                          return SizedBox(
-                            width: size.width,
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                ),
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.blue),
-                              ),
-                              onPressed: () {
-                                BlocProvider.of<AuthenticationBloc>(context)
-                                    .add(SignOut());
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const SigninScreen(),
+                        Text(
+                          'email: ${userData.email}',
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        BlocConsumer<AuthenticationBloc, AuthenticationState>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            return SizedBox(
+                              width: size.width,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4),
                                     ),
-                                    (route) => false);
-                              },
-                              child: const Text(
-                                'Logout',
-                                style: TextStyle(color: Colors.white),
+                                  ),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.blue),
+                                ),
+                                onPressed: () {
+                                  BlocProvider.of<AuthenticationBloc>(context)
+                                      .add(SignOut());
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const SigninScreen(),
+                                      ),
+                                      (route) => false);
+                                },
+                                child: const Text(
+                                  'Logout',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 );
               } else {
