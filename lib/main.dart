@@ -4,6 +4,7 @@ import 'package:rapid_task/viewmodels/application/authentication/authentication_
 import 'package:rapid_task/viewmodels/application/navbar/nav_bar_bloc.dart';
 import 'package:rapid_task/views/authentication/authentication.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rapid_task/views/authentication/signup/signup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const AuthenticationFlowScreen(),
+        home: const SignupScreen(),
         debugShowCheckedModeBanner: false,
       ),
     );

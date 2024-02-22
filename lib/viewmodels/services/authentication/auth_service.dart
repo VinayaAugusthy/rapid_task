@@ -6,6 +6,7 @@ import 'package:rapid_task/models/authentication/user_model.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<UserModel> getUserDetails() async {
     User currentUser = _firebaseAuth.currentUser!;
@@ -13,6 +14,7 @@ class AuthService {
         await _firestore.collection('users').where('id' ,isEqualTo: _firebaseAuth.currentUser!.uid!).get();
     return UserModel.fromSnap(snap.docs.first);
   }
+
   Future<UserModel?> signUpUser(
       String email, String password, String username) async {
     try {
@@ -23,6 +25,7 @@ class AuthService {
       );
       final User? firebaseUser = userCredential.user;
       if (firebaseUser != null) {
+
         UserModel user = UserModel(
           id: firebaseUser.uid,
           email: firebaseUser.email ?? '',
@@ -32,6 +35,7 @@ class AuthService {
               user.toJson(),
             );
         return user;
+
       }
     } on FirebaseAuthException catch (e) {
       print(e.toString());

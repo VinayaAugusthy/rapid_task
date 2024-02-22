@@ -1,5 +1,10 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, unnecessary_null_comparison
+
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rapid_task/viewmodels/application/authentication/authentication_bloc.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -15,7 +20,9 @@ class _SignupScreenState extends State<SignupScreen> {
     Size size = MediaQuery.sizeOf(context);
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+
     TextEditingController usernameController = TextEditingController();
+
 
     return Scaffold(
       body: Padding(
@@ -49,9 +56,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   hintText: 'Enter password',
                 ),
+
               ),
               SizedBox(
-                height: size.height / 18,
+                height: size.height / 20,
               ),
               TextFormField(
                 controller: usernameController,
@@ -73,8 +81,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4),
                           ),
+
                         ),
-                        backgroundColor: MaterialStateProperty.all(Colors.blue),
+                        hintText: 'Enter email ',
                       ),
                       onPressed: () {
                         BlocProvider.of<AuthenticationBloc>(context).add(
@@ -88,40 +97,109 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: const Text(
                         'Submit',
                         style: TextStyle(color: Colors.white),
+
                       ),
                     ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: size.height / 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Text("Already have an account ? "),
-                  GestureDetector(
-                    // onTap: () => Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const SigninScreen(),
-                    //   ),
-                    // ),
-                    child: const Text(
-                      "Signin",
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                    SizedBox(
+                      height: size.height / 20,
+                    ),
+                    TextFormField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        hintText: 'Enter username',
                       ),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      height: size.height / 20,
+                    ),
+                    BlocConsumer<AuthenticationBloc, AuthenticationState>(
+                      listener: (context, state) {},
+                      builder: (context, state) {
+                        return SizedBox(
+                          width: size.width,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue),
+                            ),
+                            onPressed: () {
+                              BlocProvider.of<AuthenticationBloc>(context).add(
+                                SignUpUser(
+                                  emailController.text.trim(),
+                                  passwordController.text.trim(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Submit',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      height: size.height / 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Text("Already have an account ? "),
+                        GestureDetector(
+                          // onTap: () => Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const SigninScreen(),
+                          //   ),
+                          // ),
+                          child: const Text(
+                            "Signin",
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         )),
       ),
     );
+    
   }
+
+  addPhoto(BuildContext context) async {
+    Uint8List pickedFile =
+        await pickImage( ImageSource.gallery);
+      setState(() {
+         Uint8List? image = pickedFile;
+      });
+    
+  }
+  
+pickImage(ImageSource source) async {
+  final ImagePicker imagePicker = ImagePicker();
+
+  XFile? file = await imagePicker.pickImage(source: source);
+
+  if (file != null) {
+    return await file.readAsBytes();
+  }
+  // ignore: avoid_print
+  print('No image selected');
+}
 }

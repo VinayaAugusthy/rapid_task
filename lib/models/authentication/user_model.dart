@@ -5,6 +5,7 @@ class UserModel {
   final String email;
   final String username;
 
+
   UserModel({required this.id, required this.email, required this.username});
 
   Map<String, dynamic> toJson() => {
@@ -12,6 +13,7 @@ class UserModel {
         "id": id,
         "username": username,
       };
+
   static UserModel fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 
@@ -19,6 +21,7 @@ class UserModel {
       username: snapshot['username'],
       email: snapshot['email'],
       id: snapshot['id'],
+
     );
   }
 }
