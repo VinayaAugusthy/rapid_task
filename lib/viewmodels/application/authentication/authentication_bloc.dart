@@ -21,7 +21,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       emit(AuthenticationLoadingState(isLoading: true));
       try {
           final UserModel? user =
-          await authService.signUpUser(event.email, event.password);
+          await authService.signUpUser(event.email, event.password,event.username);
       if (user != null) {
         emit(AuthenticationSuccessState(user));
         

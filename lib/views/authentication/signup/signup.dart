@@ -15,6 +15,8 @@ class _SignupScreenState extends State<SignupScreen> {
     Size size = MediaQuery.sizeOf(context);
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    TextEditingController usernameController = TextEditingController();
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(size.width / 16),
@@ -35,12 +37,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   hintText: 'Enter email ',
                 ),
-                // validator: (value) => validateEmail(value!),
-                // onTap: () {
-                //   setState(() {
-                //     emailTapped = true;
-                //   });
-                // },
               ),
               SizedBox(
                 height: size.height / 18,
@@ -53,15 +49,18 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   hintText: 'Enter password',
                 ),
-                // validator: (value) => validateEmail(value!),
-                // onTap: () {
-                //   setState(() {
-                //     emailTapped = true;
-                //   });
-                // },
               ),
               SizedBox(
                 height: size.height / 18,
+              ),
+              TextFormField(
+                controller: usernameController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  hintText: 'Enter username',
+                ),
               ),
               BlocConsumer<AuthenticationBloc, AuthenticationState>(
                 listener: (context, state) {},
@@ -78,12 +77,13 @@ class _SignupScreenState extends State<SignupScreen> {
                         backgroundColor: MaterialStateProperty.all(Colors.blue),
                       ),
                       onPressed: () {
-                      BlocProvider.of<AuthenticationBloc>(context).add(
-                        SignUpUser(
-                          emailController.text.trim(),
-                          passwordController.text.trim(),
-                        ),
-                      );
+                        BlocProvider.of<AuthenticationBloc>(context).add(
+                          SignUpUser(
+                            emailController.text.trim(),
+                            passwordController.text.trim(),
+                            usernameController.text.trim(),
+                          ),
+                        );
                       },
                       child: const Text(
                         'Submit',
