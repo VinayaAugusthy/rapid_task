@@ -80,7 +80,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               SignUpUser(
                                 emailController.text.trim(),
                                 passwordController.text.trim(),
-                                usernameController.text.trim(),
+                                usernameController.text.trim(),context
                               ),
                             );
                           } else {

@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, avoid_print
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class AuthenticationBloc
       emit(AuthenticationLoadingState(isLoading: true));
       try {
         final UserModel? user = await authService.signUpUser(
-            event.email, event.password, event.username);
+            event.email, event.password, event.username,event.context);
         if (user != null) {
           emit(AuthenticationSuccessState(user));
         } else {

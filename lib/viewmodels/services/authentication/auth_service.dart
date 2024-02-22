@@ -19,7 +19,7 @@ class AuthService {
   }
 
   Future<UserModel?> signUpUser(
-      String email, String password, String username) async {
+      String email, String password, String username, BuildContext context) async {
     try {
       final UserCredential userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
@@ -36,6 +36,12 @@ class AuthService {
         await _firestore.collection('users').add(
               user.toJson(),
             );
+             Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const BaseScreen(),
+            ),
+            (route) => false);
         return user;
       }
     } on FirebaseAuthException catch (e) {

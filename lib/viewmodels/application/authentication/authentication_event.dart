@@ -11,8 +11,9 @@ class SignUpUser extends AuthenticationEvent {
   final String email;
   final String password;
   final String username;
+  final BuildContext context;
 
-  const SignUpUser(this.email, this.password, this.username);
+  const SignUpUser(this.email, this.password, this.username, this.context);
 
   @override
   List<Object> get props => [email, password];
