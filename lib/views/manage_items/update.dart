@@ -40,8 +40,11 @@ class _UpdateItemsState extends State<UpdateItems> {
             MaterialPageRoute(builder: (ctx) => const BaseScreen()),
             (route) => false);
       },
-      icon: const Icon(Icons.update_rounded),
-      label: const Text('Update'),
+      icon: const Icon(Icons.update_rounded, color: Colors.white),
+      label: const Text(
+        'Update',
+        style: TextStyle(color: Colors.white),
+      ),
     );
   }
 
