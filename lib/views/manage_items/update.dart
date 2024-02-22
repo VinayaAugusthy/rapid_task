@@ -69,21 +69,24 @@ class _UpdateItemsState extends State<UpdateItems> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Edit'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: SingleChildScrollView(
-            child: Column(children: <Widget>[
+      appBar: AppBar(
+        title: const Text('Edit'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
               szdBox,
               textFieldName(myController: itemController),
               szdBox,
               textFieldName(myController: quantityController),
               szdBox,
               elavatedbtn(),
-            ]),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

@@ -4,10 +4,10 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:rapid_task/models/items/items.dart';
 import 'package:rapid_task/viewmodels/application/authentication/authentication_bloc.dart';
+import 'package:rapid_task/viewmodels/application/item/item_bloc.dart';
 import 'package:rapid_task/viewmodels/application/navbar/nav_bar_bloc.dart';
 import 'package:rapid_task/views/authentication/authentication.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rapid_task/views/authentication/signup/signup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => NavbarBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ItemBloc(),
         ),
       ],
       child: MaterialApp(
