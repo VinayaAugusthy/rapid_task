@@ -62,6 +62,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   hintText: 'Enter username',
                 ),
               ),
+              SizedBox(
+                height: size.height / 18,
+              ),
               BlocConsumer<AuthenticationBloc, AuthenticationState>(
                 listener: (context, state) {},
                 builder: (context, state) {

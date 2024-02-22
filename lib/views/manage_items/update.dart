@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rapid_task/models/items/items.dart';
 import 'package:rapid_task/viewmodels/services/manage_items/manage_items.dart';
+import 'package:rapid_task/views/basescreen/base_screen.dart';
 import 'package:rapid_task/views/home/home.dart';
 
 class UpdateItems extends StatefulWidget {
@@ -37,7 +38,7 @@ class _UpdateItemsState extends State<UpdateItems> {
         updateBtnClicked(widget.index);
 
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (ctx) => const HomeScreen()),
+            MaterialPageRoute(builder: (ctx) => const BaseScreen()),
             (route) => false);
       },
       icon: const Icon(Icons.update_rounded),
