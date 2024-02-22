@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapid_task/viewmodels/application/authentication/authentication_bloc.dart';
 import 'package:rapid_task/views/authentication/signup/signup.dart';
-import 'package:rapid_task/views/basescreen/base_screen.dart';
 import 'package:rapid_task/views/widgets/snackbar.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -69,15 +68,10 @@ class _SigninScreenState extends State<SigninScreen> {
                               BlocProvider.of<AuthenticationBloc>(context).add(
                                 SignInUser(
                                   emailController.text.trim(),
-                                  passwordController.text.trim(),
+                                  passwordController.text.trim(),context
                                 ),
                               );
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const BaseScreen(),
-                                  ),
-                                  (route) => false);
+                           
                             }
                           },
                           child: const Text(

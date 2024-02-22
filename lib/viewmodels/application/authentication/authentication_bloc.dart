@@ -13,7 +13,6 @@ class AuthenticationBloc
   final AuthService authService = AuthService();
 
   AuthenticationBloc() : super(AuthenticationInitialState()) {
-
     on<SignUpUser>((event, emit) async {
       emit(AuthenticationLoadingState(isLoading: true));
       try {
@@ -32,8 +31,10 @@ class AuthenticationBloc
     on<SignInUser>((event, emit) async {
       emit(AuthenticationLoadingState(isLoading: true));
       try {
-        final UserModel? user = await authService.signinuser(email: 
-            event.email,password:  event.password);
+        final UserModel? user = await authService.signinuser(
+            email: event.email,
+            password: event.password,
+            context: event.context);
         if (user != null) {
           emit(AuthenticationSuccessState(user));
         } else {

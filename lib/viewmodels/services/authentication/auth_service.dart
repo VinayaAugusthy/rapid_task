@@ -1,16 +1,20 @@
-// ignore_for_file: nullable_type_in_catch_clause, avoid_print
+// ignore_for_file: nullable_type_in_catch_clause, avoid_print, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:rapid_task/models/authentication/user_model.dart';
+import 'package:rapid_task/views/basescreen/base_screen.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<UserModel> getUserDetails() async {
-    final snap =
-        await _firestore.collection('users').where('id' ,isEqualTo: _firebaseAuth.currentUser!.uid).get();
+    final snap = await _firestore
+        .collection('users')
+        .where('id', isEqualTo: _firebaseAuth.currentUser!.uid)
+        .get();
     return UserModel.fromSnap(snap.docs.first);
   }
 
@@ -24,7 +28,6 @@ class AuthService {
       );
       final User? firebaseUser = userCredential.user;
       if (firebaseUser != null) {
-
         UserModel user = UserModel(
           id: firebaseUser.uid,
           email: firebaseUser.email ?? '',
@@ -34,17 +37,17 @@ class AuthService {
               user.toJson(),
             );
         return user;
-
       }
     } on FirebaseAuthException catch (e) {
       print(e.toString());
     }
     return null;
   }
- Future<UserModel?> signinuser({
-    required String email,
-    required String password,
-  }) async {
+
+  Future<UserModel?> signinuser(
+      {required String email,
+      required String password,
+     required BuildContext context}) async {
     String res = "Some error occured";
 
     try {
@@ -53,6 +56,12 @@ class AuthService {
             email: email, password: password);
 
         res = "Success";
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const BaseScreen(),
+            ),
+            (route) => false);
       } else {
         res = "Please fill all fields";
       }
@@ -68,6 +77,7 @@ class AuthService {
 
     return null;
   }
+
   Future<void> signOutUser() async {
     final User? firebaseUser = FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {

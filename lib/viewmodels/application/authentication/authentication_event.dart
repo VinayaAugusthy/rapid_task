@@ -12,18 +12,20 @@ class SignUpUser extends AuthenticationEvent {
   final String password;
   final String username;
 
-  const SignUpUser(this.email, this.password,this.username);
+  const SignUpUser(this.email, this.password, this.username);
 
   @override
   List<Object> get props => [email, password];
 }
+
 class SignInUser extends AuthenticationEvent {
   final String email;
   final String password;
-
-  const SignInUser(this.email, this.password);
+  final BuildContext context;
+  const SignInUser(this.email, this.password, this.context);
 
   @override
   List<Object> get props => [email, password];
 }
+
 class SignOut extends AuthenticationEvent {}
