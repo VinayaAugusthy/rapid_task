@@ -1,4 +1,4 @@
-// ignore_for_file: nullable_type_in_catch_clause, avoid_print, use_build_context_synchronously
+// ignore_for_file: nullable_type_in_catch_clause, avoid_print, use_build_context_synchronously, unused_local_variable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
