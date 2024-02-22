@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rapid_task/viewmodels/application/authentication/authentication_bloc.dart';
+import 'package:rapid_task/views/authentication/signin/signin.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -104,12 +105,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   const Text("Already have an account ? "),
                   GestureDetector(
-                    // onTap: () => Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const SigninScreen(),
-                    //   ),
-                    // ),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SigninScreen(),
+                      ),
+                    ),
                     child: const Text(
                       "Signin",
                       style: TextStyle(

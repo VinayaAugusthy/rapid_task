@@ -41,7 +41,33 @@ class AuthService {
     }
     return null;
   }
+ Future<UserModel?> signinuser({
+    required String email,
+    required String password,
+  }) async {
+    String res = "Some error occured";
 
+    try {
+      if (password.isNotEmpty || email.isNotEmpty) {
+        await _firebaseAuth.signInWithEmailAndPassword(
+            email: email, password: password);
+
+        res = "Success";
+      } else {
+        res = "Please fill all fields";
+      }
+    } on FirebaseAuthException catch (err) {
+      if (err.code == "user-not-found") {
+        res = "User not registred";
+      } else if (err.code == "wrong-password") {
+        res = "Wrong password";
+      }
+    } catch (err) {
+      print(err.toString());
+    }
+
+    return null;
+  }
   Future<void> signOutUser() async {
     final User? firebaseUser = FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
