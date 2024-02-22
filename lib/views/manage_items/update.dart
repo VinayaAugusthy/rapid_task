@@ -45,10 +45,10 @@ class _UpdateItemsState extends State<UpdateItems> {
     );
   }
 
-  Widget textFieldName({
-    required TextEditingController myController,
-  }) {
+  Widget textFieldName(
+      {required TextEditingController myController, TextInputType? keyboard}) {
     return TextFormField(
+      keyboardType: keyboard,
       autofocus: false,
       controller: myController,
       cursorColor: Colors.black,
@@ -80,7 +80,9 @@ class _UpdateItemsState extends State<UpdateItems> {
               szdBox,
               textFieldName(myController: itemController),
               szdBox,
-              textFieldName(myController: quantityController),
+              textFieldName(
+                  myController: quantityController,
+                  keyboard: TextInputType.number),
               szdBox,
               elavatedbtn(),
             ],

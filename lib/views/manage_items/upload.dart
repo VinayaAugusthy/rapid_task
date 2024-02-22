@@ -57,14 +57,6 @@ class UploadItemScreen extends StatelessWidget {
                 SizedBox(
                   width: size.width,
                   child: ElevatedButton(
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      backgroundColor: MaterialStateProperty.all(Colors.blue),
-                    ),
                     onPressed: () async {
                       if (itemController.text.isEmpty ||
                           quantityController.text.isEmpty) {
