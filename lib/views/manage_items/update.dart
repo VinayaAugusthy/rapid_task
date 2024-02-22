@@ -5,7 +5,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rapid_task/models/items/items.dart';
 import 'package:rapid_task/viewmodels/services/manage_items/manage_items.dart';
 import 'package:rapid_task/views/basescreen/base_screen.dart';
-import 'package:rapid_task/views/home/home.dart';
 
 class UpdateItems extends StatefulWidget {
   UpdateItems({super.key, required this.index, required this.items});
