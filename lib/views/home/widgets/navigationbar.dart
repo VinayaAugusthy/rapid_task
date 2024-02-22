@@ -4,7 +4,7 @@ import 'package:rapid_task/viewmodels/application/navbar/nav_bar_bloc.dart';
 import 'package:rapid_task/views/home/home.dart';
 import 'package:rapid_task/views/profile/profile.dart';
 
-final navItems = [const HomeScreen(), const ProfileScreen()];
+final navItems = [const HomeScreen(),  ProfileScreen()];
 
 class BottomBar extends StatelessWidget {
   const BottomBar({
