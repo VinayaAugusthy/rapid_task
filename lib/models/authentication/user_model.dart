@@ -4,18 +4,13 @@ class UserModel {
   final String id;
   final String email;
   final String username;
-  final String photoUrl;
 
-  UserModel({
-    required this.id,
-    required this.email,
-    required this.username,
-    required this.photoUrl,
-  });
+
+  UserModel({required this.id, required this.email, required this.username});
+
   Map<String, dynamic> toJson() => {
         "email": email,
-        "uid": id,
-        "photoUrl": photoUrl,
+        "id": id,
         "username": username,
       };
 
@@ -26,7 +21,7 @@ class UserModel {
       username: snapshot['username'],
       email: snapshot['email'],
       id: snapshot['id'],
-      photoUrl: snapshot['photoUrl'],
+
     );
   }
 }

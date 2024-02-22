@@ -20,8 +20,9 @@ class _SignupScreenState extends State<SignupScreen> {
     Size size = MediaQuery.sizeOf(context);
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
-    Uint8List? image;
-    final _formKey = GlobalKey<FormState>();
+
+    TextEditingController usernameController = TextEditingController();
+
 
     return Scaffold(
       body: Padding(
@@ -33,58 +34,70 @@ class _SignupScreenState extends State<SignupScreen> {
             children: [
               const Text('SIGNUP'),
               SizedBox(
+                height: size.height / 10,
+              ),
+              TextFormField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  hintText: 'Enter email ',
+                ),
+              ),
+              SizedBox(
                 height: size.height / 18,
               ),
-              Stack(
-                children: [
-                  (image != null
-                      ? CircleAvatar(
-                          radius: 55,
-                          backgroundImage: MemoryImage(image),
-                        )
-                      : const CircleAvatar(
-                          radius: 55,backgroundColor: Colors.amber,
-                          backgroundImage: AssetImage('assets/images/dp.jpg'),
-                        )),
-                  Positioned(
-                    right: 0,
-                    bottom: 0.5,
-                    child: IconButton(
-                      onPressed: () {
-                        addPhoto(context);
-                      },
-                      icon: const Icon(Icons.camera_alt_sharp),
-                      color: Colors.black,
-                    ),
-                  )
-                ],
+              TextFormField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  hintText: 'Enter password',
+                ),
+
               ),
               SizedBox(
                 height: size.height / 20,
               ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
+              TextFormField(
+                controller: usernameController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  hintText: 'Enter username',
+                ),
+              ),
+              BlocConsumer<AuthenticationBloc, AuthenticationState>(
+                listener: (context, state) {},
+                builder: (context, state) {
+                  return SizedBox(
+                    width: size.width,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+
                         ),
                         hintText: 'Enter email ',
                       ),
-                    ),
-                    SizedBox(
-                      height: size.height / 20,
-                    ),
-                    TextFormField(
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        hintText: 'Enter password',
+                      onPressed: () {
+                        BlocProvider.of<AuthenticationBloc>(context).add(
+                          SignUpUser(
+                            emailController.text.trim(),
+                            passwordController.text.trim(),
+                            usernameController.text.trim(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Submit',
+                        style: TextStyle(color: Colors.white),
+
                       ),
                     ),
                     SizedBox(

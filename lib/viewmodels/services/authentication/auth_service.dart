@@ -8,52 +8,15 @@ class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  //  Future<String> signupUser({
-  //   required String email,
-  //   required String password,
-  //   required String username,
-  //   // required String bio,
-  //   // required Uint8List file,
-  // }) async {
-  //   String res = "Some error has been occured";
+  Future<UserModel> getUserDetails() async {
+    User currentUser = _firebaseAuth.currentUser!;
+    final snap =
+        await _firestore.collection('users').where('id' ,isEqualTo: _firebaseAuth.currentUser!.uid!).get();
+    return UserModel.fromSnap(snap.docs.first);
+  }
 
-  //   try {
-  //     if (email.isNotEmpty ||
-  //         password.isNotEmpty ||
-  //         username.isNotEmpty ||
-  //        ) {
-  //       //Registering user
-
-  //       UserCredential cred = await _auth.createUserWithEmailAndPassword(
-  //           email: email, password: password);
-
-  //       String photoUrl = await StorageMethods()
-  //           .uploadImageToStorage('profilePics', file, false);
-
-  //       UserModel user = user(
-  //           email: email,
-  //           uid: cred.user!.uid,
-  //           photoUrl: photoUrl,
-  //           username: username,
-  //           bio: bio,
-  //           followers: [],
-  //           followings: []);
-
-  //       await _firestore.collection('users').doc(cred.user!.uid).set(
-  //             user.toJson(),
-  //           );
-  //       res = "Now you can login with credentials";
-  //     }
-  //   } catch (err) {
-  //     res = err.toString();
-  //   }
-
-  //   return res;
-  // }
   Future<UserModel?> signUpUser(
-    String email,
-    String password,
-  ) async {
+      String email, String password, String username) async {
     try {
       final UserCredential userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
@@ -62,12 +25,17 @@ class AuthService {
       );
       final User? firebaseUser = userCredential.user;
       if (firebaseUser != null) {
-        //  userRef =
-        //     _firestore.collection('users').doc(firebaseUser.uid);
-        // return UserModel(
-        //   id: firebaseUser.uid,
-        //   email: firebaseUser.email ?? '',
-        // );
+
+        UserModel user = UserModel(
+          id: firebaseUser.uid,
+          email: firebaseUser.email ?? '',
+          username: username,
+        );
+        await _firestore.collection('users').add(
+              user.toJson(),
+            );
+        return user;
+
       }
     } on FirebaseAuthException catch (e) {
       print(e.toString());
