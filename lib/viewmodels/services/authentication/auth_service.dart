@@ -7,7 +7,12 @@ import 'package:rapid_task/models/authentication/user_model.dart';
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
+  Future<UserModel> getUserDetails() async {
+    User currentUser = _firebaseAuth.currentUser!;
+    final snap =
+        await _firestore.collection('users').where('id' ,isEqualTo: _firebaseAuth.currentUser!.uid!).get();
+    return UserModel.fromSnap(snap.docs.first);
+  }
   Future<UserModel?> signUpUser(
       String email, String password, String username) async {
     try {
