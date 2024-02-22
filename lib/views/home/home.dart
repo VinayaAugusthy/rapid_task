@@ -10,8 +10,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-     body: Text('data'),
-    );
+    Size size = MediaQuery.sizeOf(context);
+
+    return Scaffold(
+        body: SafeArea(
+            child: Padding(
+      padding: EdgeInsets.only(
+        left: size.width / 16,
+        right: size.width / 16,
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [Container(), FloatingActionButton(onPressed: () {})],
+        ),
+      ),
+    )));
   }
 }
