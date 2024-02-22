@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rapid_task/models/authentication/user_model.dart';
 import 'package:rapid_task/views/basescreen/base_screen.dart';
+import 'package:rapid_task/views/widgets/snackbar.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -18,8 +19,8 @@ class AuthService {
     return UserModel.fromSnap(snap.docs.first);
   }
 
-  Future<UserModel?> signUpUser(
-      String email, String password, String username, BuildContext context) async {
+  Future<UserModel?> signUpUser(String email, String password, String username,
+      BuildContext context) async {
     try {
       final UserCredential userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
@@ -36,7 +37,7 @@ class AuthService {
         await _firestore.collection('users').add(
               user.toJson(),
             );
-             Navigator.pushAndRemoveUntil(
+        Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
               builder: (context) => const BaseScreen(),
@@ -53,7 +54,7 @@ class AuthService {
   Future<UserModel?> signinuser(
       {required String email,
       required String password,
-     required BuildContext context}) async {
+      required BuildContext context}) async {
     String res = "Some error occured";
 
     try {
@@ -69,12 +70,17 @@ class AuthService {
             ),
             (route) => false);
       } else {
+        callSnackBar(msg: 'Please fill all fields', ctx: context);
+
         res = "Please fill all fields";
       }
     } on FirebaseAuthException catch (err) {
       if (err.code == "user-not-found") {
+        callSnackBar(msg: 'User not found', ctx: context);
         res = "User not registred";
       } else if (err.code == "wrong-password") {
+        callSnackBar(msg: 'Invalid Password', ctx: context);
+
         res = "Wrong password";
       }
     } catch (err) {
