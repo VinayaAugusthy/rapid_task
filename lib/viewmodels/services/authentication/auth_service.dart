@@ -9,9 +9,8 @@ class AuthService {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<UserModel> getUserDetails() async {
-    User currentUser = _firebaseAuth.currentUser!;
     final snap =
-        await _firestore.collection('users').where('id' ,isEqualTo: _firebaseAuth.currentUser!.uid!).get();
+        await _firestore.collection('users').where('id' ,isEqualTo: _firebaseAuth.currentUser!.uid).get();
     return UserModel.fromSnap(snap.docs.first);
   }
 
