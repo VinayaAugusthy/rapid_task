@@ -23,9 +23,9 @@ class BaseScreen extends StatelessWidget {
             BlocProvider.of<NavbarBloc>(context)
                 .add(OnTapped(navIndex: bottomIndex));
           },
-          selectedItemColor: Colors.blue,
+          selectedItemColor: Colors.red,
           unselectedItemColor: Colors.black,
-          selectedIconTheme: const IconThemeData(color: Colors.blue),
+          selectedIconTheme: const IconThemeData(color: Colors.red),
           unselectedIconTheme: const IconThemeData(color: Colors.black),
           items: const [
             BottomNavigationBarItem(

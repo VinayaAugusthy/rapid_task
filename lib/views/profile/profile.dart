@@ -13,7 +13,9 @@ class ProfileScreen extends StatelessWidget {
     Size size = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Profile'),
+      ),
       body: SafeArea(
         child: FutureBuilder<UserModel>(
             future: authService.getUserDetails(),
@@ -22,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
                 final userData = snapshot.data;
                 return Center(
                   child: Padding(
-                    padding:  EdgeInsets.all(size.width/16),
+                    padding: EdgeInsets.all(size.width / 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -46,22 +48,14 @@ class ProfileScreen extends StatelessWidget {
                             return SizedBox(
                               width: size.width,
                               child: ElevatedButton(
-                                style: ButtonStyle(
-                                  shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.blue),
-                                ),
                                 onPressed: () {
                                   BlocProvider.of<AuthenticationBloc>(context)
                                       .add(SignOut());
                                   Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const SigninScreen(),
+                                        builder: (context) =>
+                                            const SigninScreen(),
                                       ),
                                       (route) => false);
                                 },

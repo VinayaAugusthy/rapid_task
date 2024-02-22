@@ -72,14 +72,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   return SizedBox(
                     width: size.width,
                     child: ElevatedButton(
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        backgroundColor: MaterialStateProperty.all(Colors.blue),
-                      ),
                       onPressed: () {
                         BlocProvider.of<AuthenticationBloc>(context).add(
                           SignUpUser(

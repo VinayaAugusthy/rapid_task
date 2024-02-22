@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:rapid_task/models/items/items.dart';
 import 'package:rapid_task/viewmodels/application/authentication/authentication_bloc.dart';
@@ -21,7 +20,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -37,10 +35,22 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
         theme: ThemeData(
-          appBarTheme: const AppBarTheme(color: Colors.red),
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          appBarTheme: const AppBarTheme(
+            color: Colors.red,
+            centerTitle: true,
+            titleTextStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          elevatedButtonTheme: const ElevatedButtonThemeData(
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStatePropertyAll(Color.fromARGB(255, 234, 106, 97)),
+            ),
+          ),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
           useMaterial3: true,
         ),
         home: const AuthenticationFlowScreen(),
