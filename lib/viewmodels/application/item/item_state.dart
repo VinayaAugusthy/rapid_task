@@ -1,5 +1,11 @@
 part of 'item_bloc.dart';
 
- class ItemState {}
+class ItemState {
+  final List<Items> listItems;
 
-final class ItemInitial extends ItemState {}
+  ItemState({required this.listItems});
+}
+
+final class ItemInitial extends ItemState {
+  ItemInitial({required super.listItems});
+}
